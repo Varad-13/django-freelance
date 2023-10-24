@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+
+<body>
+    <div class="hero is-fullheight">
+        <div class="hero-body is-justify-content-center is-align-items-center">
+            <form class="columns is-flex is-flex-direction-column box" method="POST">
+                {% csrf_token %}
+                <div class="column">
+                    <label for="username">username</label>
+                    <input name='username' class="input is-primary" type="text" placeholder="username">
+                </div>
+                <div class="column">
+                    <label for="password">Password</label>
+                    <input name='password' class="input is-primary" type="password" placeholder="Password">
+                    <a href="forget.html" class="is-size-7 has-text-primary">forget password?</a>
+                </div>
+                <div class="column">
+                    <button class="button is-primary is-fullwidth" type="submit">Login</button>
+                </div>
+                <div class="has-text-centered">
+                    <p class="is-size-7"> Don't have an account? <a href="{% url 'userSignup' %}" class="has-text-primary">Sign up</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

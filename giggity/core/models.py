@@ -22,17 +22,17 @@ class UserInterests(models.Model):
     score = models.FloatField()
 
 class Freelancer(models.Model):
-    user_id = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
+    user_id = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True )
     freelancer_id = models.AutoField(primary_key=True)
     custom_url = models.CharField(max_length=255, unique=True)
-    paypal_id = models.CharField(max_length=255)
+    paypal_id = models.CharField(max_length=255, blank=True)
 
 class Post(models.Model):
     post_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.TextField()
     freelancer = models.ForeignKey(Freelancer, on_delete=models.CASCADE)
-    images = models.ImageField(upload_to='images/')
+    images = models.ImageField(upload_to='images/', default='assets/user-profile.svg')
     link = models.SlugField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 

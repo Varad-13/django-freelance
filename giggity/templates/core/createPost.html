@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+{{ form.errors }}
+{{ form.non_field_errors }}
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+
+<body>
+    <div class="hero is-fullheight">
+        <div class="hero-body is-justify-content-center is-align-items-center">
+            <form class="columns is-flex is-flex-direction-column box" method="POST">
+                {% csrf_token %}
+                <div class="column">
+                    <label for="name">name</label>
+                    {{form.name}}
+                </div>
+                <div class="column">
+                    <label for="description">description</label>
+                    {{form.description}}
+                </div>
+                <div class="column">
+                    <label for="images">image</label>
+                    {{form.images}}
+                </div>
+                <div class="column">
+                    <label for="amount">Amount</label>
+                    {{form.amount}}
+                </div>
+                <div class="column">
+                    <button class="button is-primary is-fullwidth" type="submit">Login</button>
+                </div>
+                <div class="has-text-centered">
+                    <p class="is-size-7"> Don't have an account? <a href="{% url 'userSignup' %}" class="has-text-primary">Sign up</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+{% endblock %}
