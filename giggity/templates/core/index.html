@@ -26,8 +26,9 @@
                             </figure>
                         </div> 
                         <div class="media-content">
+                            <a href="{% url 'chat' Post.freelancer.user_id.username %}">
                             {{Post.freelancer.user_id.username}}
-                            
+                        </a>
                         </div>
                     </div>
                     <div class="content">

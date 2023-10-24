@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+{{ form.errors }}
+{{ form.non_field_errors }}
+
+<body>
+    <div class="hero is-fullheight">
+      <div class="hero-body is-justify-content-center is-align-items-center">
+        <form class="columns is-flex is-flex-direction-column box" method="POST">
+          {% csrf_token %}
+            <div class="column">
+            <label for="name">Name</label>
+            {{form.name}}
+          </div>
+          <div class="column">
+            <label for="username">username</label>
+            {{form.username}}
+          </div>
+          <div class="column">
+            <label for="email">Email</label>
+            {{form.email}}
+          </div>
+          <div class="column">
+            <label for="Name">Phone Number</label>
+            {{form.phone_number}}
+            </label>
+          </div>
+          <div class="column">
+            <label for="custom_url">custom url</label>
+            <input name='custom_url' class="input is-primary" type="text" placeholder="Unique URL">
+          </div>
+          <div class="column">
+            <label for="Name">Password</label>
+            {{form.password1}}
+            </label>
+          </div>
+          <div class="column">
+            <label for="Name">Confirm Password</label>
+            {{form.password2}}
+            </label>
+          </div>
+          <div class="column">
+            <button class="button is-primary is-fullwidth" type="submit">Create an account</button>
+          </div>
+          <div class="has-text-centered">
+            <p> Already have an account?  <a href="{% url 'login' %}" class="has-text-primary">Login</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+
+{% endblock %}
