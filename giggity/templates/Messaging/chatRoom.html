@@ -49,9 +49,23 @@
             </span>
         </div>
         <div class="chat">
+            {% for message in messages %}
+            {% if message.sender == request.user.username %}
             <div class="message">
-                {% for message in messages %}
-                            {% if message.sender == request.user.username %}
+                
+                
+                <div class="message-header">
+                    <p class="username">{{request.user.username}}</p>
+                    <p class="timestamp">{{message.timestamp|time:'H:i'}}</p>
+                </div>
+                <div class="message-body">
+                    {{message.message}}
+                </div>
+            </div>
+            {% else %}
+            <div class="message">
+                
+                            
                 <div class="message-header">
                     <p class="username">{{request.user.username}}</p>
                     <p class="timestamp">{{message.timestamp|time:'H:i'}}</p>
