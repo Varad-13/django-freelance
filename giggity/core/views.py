@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from .models import UserProfile, Post, Post_tag, Recommendations
+from .models import UserProfile, Post, Post_tag, Recommendations, Tag
 from django.contrib.auth.decorators import login_required
 
 
@@ -16,13 +16,43 @@ def index(request):
         posts = Post.objects.all()
         user_profiles = UserProfile.objects.in_bulk([post.freelancer.user_id.id for post in posts])
         tags = Post_tag.objects.filter(post__in=posts).distinct()
+        T = Tag.objects.all()
         context = {
             'users': users,
             'posts' : posts,
             'user_profiles': user_profiles,
             'tags': tags,
+            'T': T,
         }
         return render(request, 'core/index.html', context)
+
+
+@login_required(login_url='account_login')
+def filterTag(request, pk):
+
+        users = UserProfile.objects.exclude(username=request.user.username)
+
+        tf = Tag.objects.get(id=pk)
+        pt = Post_tag.objects.filter(tag = tf)
+        posts = Post.objects.in_bulk([p.post.post_id for p in pt])
+        print(posts)
+
+        
+        print(pt)
+        # user_profiles = UserProfile.objects.in_bulk([post.freelancer.user_id.id for post in posts])
+        tags = Post_tag.objects.filter(post__in=posts).distinct()
+        T = Tag.objects.all()
+        context = {
+            'users': users,
+            'posts' : posts,
+            'user_profiles' : '',
+            'tags': tags,
+            'T': T,
+        }
+        return render(request, 'core/index.html', context)
+
+
+
 
 
 def search(request, query):
