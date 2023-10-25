@@ -139,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL="core.UserProfile"
 
-LOGIN_URL = "login"
+LOGIN_URL = "account_login"
 
 
 # Internationalization

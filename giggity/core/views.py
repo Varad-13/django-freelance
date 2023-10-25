@@ -4,12 +4,12 @@ from .models import UserProfile, Post, Post_tag, Recommendations
 from django.contrib.auth.decorators import login_required
 
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def landing(request):
 
     return render(request, 'core/landing.html')
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def index(request):
 
         users = UserProfile.objects.exclude(username=request.user.username)
