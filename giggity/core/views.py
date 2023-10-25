@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from .models import UserProfile, Post, Post_tag, Recommendations
+from django.contrib.auth.decorators import login_required
 
+
+@login_required(login_url='login')
 def landing(request):
-    if request.user.is_authenticated:
-        return redirect('index')
-    else:
-        return render(request, 'core/landing.html')
 
+    return render(request, 'core/landing.html')
 
+@login_required(login_url='login')
 def index(request):
-    if request.user.is_authenticated:
+
         users = UserProfile.objects.exclude(username=request.user.username)
         posts = Post.objects.all()
         user_profiles = UserProfile.objects.in_bulk([post.freelancer.user_id.id for post in posts])
@@ -22,8 +23,7 @@ def index(request):
             'tags': tags,
         }
         return render(request, 'core/index.html', context)
-    else:
-        return redirect('landing')
+
 
 def search(request, query):
     results = Post.objects.filter(Q(name__contains=query) | Q(description__contains=query))
