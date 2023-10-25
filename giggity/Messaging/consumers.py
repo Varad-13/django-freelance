@@ -127,10 +127,9 @@ class OnlineStatusConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def change_online_status(self, username, c_type):
         user = UserProfile.objects.get(username=username)
-        userprofile = UserProfile.objects.get(user=user)
         if c_type == 'open':
-            userprofile.online_status = True
-            userprofile.save()
+            user.online_status = True
+            user.save()
         else:
-            userprofile.online_status = False
-            userprofile.save()
+            user.online_status = False
+            user.save()
